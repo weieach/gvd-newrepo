@@ -1,0 +1,117 @@
+
+> GenderViolenceDatabase@0.3.0 lint
+> vue-cli-service lint
+
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/App.vue
+  47:10  error  'computed' is defined but never used        no-unused-vars
+  59:11  error  'store' is assigned a value but never used  no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/AboutGVD.vue
+  301:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/ArticleDetail.vue
+  31:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+  61:11  error  Empty block statement                                        no-empty
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Blog.vue
+  69:9   error  Component name "Blog" should always be multi-word            vue/multi-word-component-names
+  70:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/BookmarkButton.vue
+  21:11  error  'store' is assigned a value but never used  no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Bookmarks.vue
+    1:1  error  Component name "Bookmarks" should always be multi-word       vue/multi-word-component-names
+  278:5  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Collection.vue
+  16:9  error  Component name "collection" should always be multi-word  vue/multi-word-component-names
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Dashboard.vue
+  31:9   error  Component name "dashboard" should always be multi-word       vue/multi-word-component-names
+  32:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Feedback.vue
+  263:9   error  Component name "Feedback" should always be multi-word  vue/multi-word-component-names
+  317:15  error  'submitData' is assigned a value but never used        no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/FeedbackTab.vue
+  299:15  error  'submitData' is assigned a value but never used  no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Glossary.vue
+  94:9   error  Component name "Glossary" should always be multi-word        vue/multi-word-component-names
+  95:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Home.vue
+  32:9   error  Component name "home" should always be multi-word            vue/multi-word-component-names
+  33:29  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Journals.vue
+    9:11   error  Elements in iteration expect to have 'v-bind:key' directives  vue/require-v-for-key
+   12:103  error  Parsing error: missing-whitespace-between-attributes          vue/no-parsing-error
+   12:103  error  Parsing error: unexpected-character-in-attribute-name         vue/no-parsing-error
+   12:103  error  Attribute name " is not valid                                 vue/valid-attribute-name
+   13:15   error  Elements in iteration expect to have 'v-bind:key' directives  vue/require-v-for-key
+   24:15   error  Elements in iteration expect to have 'v-bind:key' directives  vue/require-v-for-key
+   65:11   error  Component name "Journals" should always be multi-word         vue/multi-word-component-names
+  110:41   error  'year' is defined but never used                              no-unused-vars
+  130:9    error  The "PageFooter" component has been registered but not used   vue/no-unused-components
+  136:27   error  'v' is defined but never used                                 no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Login.vue
+  1:1  error  Component name "Login" should always be multi-word  vue/multi-word-component-names
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/QueryBuilder.vue
+  52:15  error  'newQuery' is defined but never used  no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Schema.vue
+   96:9   error  Component name "schema" should always be multi-word               vue/multi-word-component-names
+  122:11  error  'value' is defined but never used                                 no-unused-vars
+  241:5   error  The "Autocomplete" component has been registered but not used     vue/no-unused-components
+  242:5   error  The "FontAwesomeIcon" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/SchemaNode.vue
+  114:10  error  'fas' is defined but never used  no-unused-vars
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Search.vue
+  55:5  error  The "QueryBuilder" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/SubQuery.vue
+  10:7  error  Elements in iteration expect to have 'v-bind:key' directives  vue/require-v-for-key
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/TreemapPage.vue
+  37:9  error  Component name "treemappage" should always be multi-word     vue/multi-word-component-names
+  72:5  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/TreemapSplitPage.vue
+  49:9  error  Component name "treemappage" should always be multi-word     vue/multi-word-component-names
+  86:5  error  The "PageFooter" component has been registered but not used  vue/no-unused-components
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/components/Untagged.vue
+  29:9  error  Component name "untagged" should always be multi-word  vue/multi-word-component-names
+
+/Users/tumainiussiri/Desktop/SandBox/Projects/GenderViolenceDatabase/gvdvue3/src/store/index.js
+    1:23  error  'ref' is defined but never used                   no-unused-vars
+    2:8   error  'schemajson' is defined but never used            no-unused-vars
+    4:13  error  'over' is defined but never used                  no-unused-vars
+   16:8   error  'router' is defined but never used                no-unused-vars
+   18:7   error  'samplequery' is assigned a value but never used  no-unused-vars
+   95:27  error  'state' is defined but never used                 no-unused-vars
+  185:29  error  'state' is defined but never used                 no-unused-vars
+  294:28  error  'state' is defined but never used                 no-unused-vars
+  294:35  error  'getters' is defined but never used               no-unused-vars
+  327:21  error  'state' is defined but never used                 no-unused-vars
+  327:28  error  'payload' is defined but never used               no-unused-vars
+  377:30  error  'bookmark' is not defined                         no-undef
+  382:64  error  'bookmarkId' is not defined                       no-undef
+  453:5   error  Duplicate key 'ADD_TAG'                           no-dupe-keys
+  458:5   error  Duplicate key 'REMOVE_TAG'                        no-dupe-keys
+  535:37  error  'state' is defined but never used                 no-unused-vars
+  551:29  error  'context' is defined but never used               no-unused-vars
+  562:18  error  'context' is defined but never used               no-unused-vars
+  772:41  error  'state' is defined but never used                 no-unused-vars
+  772:48  error  'commit' is defined but never used                no-unused-vars
+
+✖ 64 problems (64 errors, 0 warnings)
+
