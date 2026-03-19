@@ -15,7 +15,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content flex-1 max-w-[960px] min-w-0 flex flex-col gap-10">
+    <div class="main-content flex-1 max-w-[80ch] min-w-0 flex flex-col gap-10">
       <!-- Overview Section (Dynamic) -->
       <section class="overview-section">
         <div

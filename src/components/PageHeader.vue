@@ -12,7 +12,7 @@
           class="website-logo hover:scale-[1.01] transition-transform duration-200 ease-in-out"
           @click="closeMobileMenu"
         >
-          <img src="@/assets/gvd/nav-logo-new.png" class="w-[142px] md:w-[164px]" alt="logo-img" />
+          <img src="@/assets/gvd/nav-logo-new (restructured).png" class="w-[142px] md:w-[164px]" alt="logo-img" />
         </router-link>
         <div class="hidden lg:flex items-center gap-9 xl:gap-12">
           <router-link to="/browse" class="nav-link">Browse</router-link>

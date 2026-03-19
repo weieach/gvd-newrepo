@@ -16,7 +16,7 @@
 
       <!-- Main Content -->
 
-      <div class="main-content flex-1 max-w-[960px] min-w-0 w-full">
+      <div class="main-content flex-1 max-w-[80ch] min-w-0 w-full">
         <div v-if="loading" class="text-center text-gray-500 text-xl gap-2 py-10">
           Loading resources...
         </div>

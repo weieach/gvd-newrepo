@@ -11,7 +11,7 @@
           <div
             class="homescreen-center-ui flex flex-col items-center gap-4 w-full"
           >
-            <img src="@/assets/gvd/gvd-logo-new.png" class="w-20" alt="logo" />
+            <img src="@/assets/gvd/gvd-logo-new (restructured).png" class="w-20 hero-logo-spin" alt="logo" />
             <h1
               class="page-title text-black text-center px-2"
             >
@@ -32,13 +32,13 @@
                   @keyup.enter="handleEnter"
                   placeholder="Try a keyword, journal, or tag"
                   type="text"
-                  class="landing-search-input px-[0.8rem] border-none text-base text-[#5B2960] flex-1 bg-white focus:outline-none"
+                  class="landing-search-input px-[0.6rem] border-none text-base text-[#5B2960] flex-1 bg-white focus:outline-none"
                 />
               </div>
               <button
                 @click="performSearch"
                 type="submit"
-                class="primary-btn-search bg-primary-color text-white px-[1.2rem] py-[10px] text-[1.8rem] border-none cursor-pointer hover:bg-dark-bg transition-colors duration-200"
+                class="primary-btn-search bg-primary-color text-white px-[1.5rem] py-[10px] text-[1.8rem] border-none cursor-pointer hover:bg-dark-bg transition-colors duration-200"
               >
                 <i class="ph-bold ph-magnifying-glass"></i>
               </button>
@@ -578,6 +578,16 @@ export default {
 </style>
 
 <style scoped>
+@keyframes spin-logo {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-logo-spin {
+  transform-origin: center center;
+  animation: spin-logo 12s linear infinite;
+}
+
 .card-glossary {
   position: relative;
 }
