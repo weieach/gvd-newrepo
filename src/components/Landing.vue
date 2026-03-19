@@ -9,9 +9,9 @@
           class="h-screen relative flex flex-col items-center justify-center bg-bg-color"
         >
           <div
-            class="homescreen-center-ui flex flex-col items-center gap-3 w-full"
+            class="homescreen-center-ui flex flex-col items-center gap-4 w-full"
           >
-            <img src="@/assets/gvd/gvd-logo.png" class="w-20" alt="logo" />
+            <img src="@/assets/gvd/gvd-logo-new.png" class="w-20" alt="logo" />
             <h1
               class="page-title text-black text-center px-2"
             >
@@ -20,10 +20,10 @@
 
             <div
               ref="landingSearchBox"
-              class="input-bar bg-white border-[0.5px] border-[#BDA7BF] rounded-[20px] w-full max-w-[900px] flex justify-between overflow-visible relative"
+              class="input-bar border-radius-lg bg-white border-[0.5px] border-[white] w-full max-w-[700px] flex justify-between overflow-visible relative"
             >
               <div
-                class="input-bar-controls pl-[30px] pr-[20px] py-[20px] flex-1 flex justify-between items-center"
+                class="input-bar-controls  py-[20px] flex-1 flex justify-between items-center"
               >
                 <input
                   v-model="searchQuery"
@@ -32,13 +32,13 @@
                   @keyup.enter="handleEnter"
                   placeholder="Try a keyword, journal, or tag"
                   type="text"
-                  class="landing-search-input border-none text-base text-[#5B2960] flex-1 bg-white focus:outline-none"
+                  class="landing-search-input px-[0.8rem] border-none text-base text-[#5B2960] flex-1 bg-white focus:outline-none"
                 />
               </div>
               <button
                 @click="performSearch"
                 type="submit"
-                class="primary-btn-search bg-primary-color text-white px-[34px] py-[10px] text-[1.4rem] border-none cursor-pointer hover:bg-dark-bg transition-colors duration-200"
+                class="primary-btn-search bg-primary-color text-white px-[1.2rem] py-[10px] text-[1.8rem] border-none cursor-pointer hover:bg-dark-bg transition-colors duration-200"
               >
                 <i class="ph-bold ph-magnifying-glass"></i>
               </button>
@@ -69,7 +69,7 @@
             </div>
 
             <p
-              class="text-center max-w-[55ch] body-copy-sm pt-2 text-black px-2"
+              class="text-center max-w-[55ch] body-copy-md pt-2 text-black px-2"
             >
               An ongoing project to collect interdisciplinary academic research
               related to gender-based violence.
@@ -77,7 +77,7 @@
           </div>
 
           <div
-            class="msg-scrolldown absolute bottom-8 left-0 right-0 w-full text-center text-[#946897]"
+            class="msg-scrolldown absolute bottom-1 left-0 right-0 w-full text-center text-[#946897]"
           >
             <p>Scroll down to learn more</p>
             <p>
@@ -550,15 +550,20 @@ export default {
 </script>
 
 <style>
+.main-content h1 {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
 /* Global styles for dynamic Drupal content */
 .drupal-content h2,
 .drupal-content h3 {
   font-size: var(--type-section-title);
   font-family: "larken", serif;
   font-weight: 500;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-heading);
   color: black;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .drupal-content p {
@@ -568,7 +573,7 @@ export default {
 }
 
 .drupal-content strong {
-  font-weight: 700;
+  font-weight: 500;
 }
 </style>
 
@@ -578,14 +583,18 @@ export default {
 }
 
 .input-bar {
-  border: 1px solid #bda7bf;
-  border-radius: 999px;
+  border: var(--search-border);
+  border-radius: var(--search-radius);
   min-height: 46px;
 }
 
 .input-bar:focus-within {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(136, 63, 143, 0.12);
+}
+
+.input-bar-controls {
+  padding-inline: var(--search-padding-inline);
 }
 
 .landing-search-input {
@@ -604,7 +613,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-left: 1px solid rgba(189, 167, 191, 0.5);
-  border-radius: 0 999px 999px 0;
+  border-radius: 0 var(--search-radius) var(--search-radius) 0;
   line-height: 1;
 }
 

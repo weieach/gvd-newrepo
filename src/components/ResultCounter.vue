@@ -1,12 +1,13 @@
 <template>
   <div
     id="resultcounter"
-    class="result-summary bg-white border border-[#EBE4EA] rounded-2xl p-5 shadow-sm mb-6"
+    class="result-summary"
   >
     <div v-if="hasresponse" class="summary-content">
+      <div class="counter-rows">
       <!-- Top Row: Toggles and Sort/View Settings -->
       <div
-        class="flex flex-wrap justify-between items-center gap-4 pb-4 border-b border-[#F5F1F5]"
+        class="flex flex-wrap justify-between items-center gap-4 pb-3 border-b border-[#F5F1F5]"
       >
         <!-- Left: Action Toggles -->
         <div class="flex items-center gap-6">
@@ -83,7 +84,7 @@
       </div>
 
       <!-- Bottom Row: Pagination & Count -->
-      <div class="flex flex-wrap justify-between items-center gap-4 pt-4">
+      <div class="flex flex-wrap justify-between items-center gap-4 pt-2">
         <!-- Count -->
         <span class="text-sm text-gray-500 font-medium">
           Showing
@@ -103,10 +104,6 @@
           class="pagination-controls flex items-center gap-1.5"
           role="navigation"
           aria-label="Pagination"
-          @mouseenter="expandPagination"
-          @mouseleave="collapsePaginationWithDelay"
-          @focusin="expandPagination"
-          @focusout="handlePaginationFocusOut"
         >
           <button
             type="button"
@@ -127,10 +124,7 @@
 
           <transition-group
             tag="div"
-            :class="[
-              'pagination-window flex items-center mx-2 gap-1',
-              { expanded: isPaginationExpanded },
-            ]"
+            class="pagination-window flex items-center mx-2 gap-1"
             name="page-pill"
           >
             <button
@@ -167,6 +161,7 @@
           </button>
         </div>
       </div>
+      </div><!-- /.counter-rows -->
     </div>
     <div class="error p-4 bg-red-50 text-red-600 rounded-lg text-center" v-else>
       The search service is currently down.
@@ -183,8 +178,6 @@ export default {
       selectedPageSize: 50,
       sortKey: "parsedDate",
       sortDirection: "desc",
-      isPaginationExpanded: false,
-      paginationHoverTimeout: null,
     };
   },
   computed: {
@@ -241,15 +234,9 @@ export default {
       return Math.min(this.maxpage, this.visiblePageStart + windowSize - 1);
     },
     paginationStart() {
-      if (!this.isPaginationExpanded) {
-        return this.currentpage || 1;
-      }
       return this.visiblePageStart;
     },
     paginationEnd() {
-      if (!this.isPaginationExpanded) {
-        return this.currentpage || 1;
-      }
       return this.visiblePageEnd;
     },
     allCollapsed() {
@@ -323,32 +310,6 @@ export default {
     toggleOpenAccess() {
       this.$store.dispatch("toggleOpenAccessFilter");
     },
-    expandPagination() {
-      if (this.paginationHoverTimeout) {
-        clearTimeout(this.paginationHoverTimeout);
-        this.paginationHoverTimeout = null;
-      }
-      this.isPaginationExpanded = true;
-    },
-    collapsePaginationWithDelay() {
-      if (this.paginationHoverTimeout) {
-        clearTimeout(this.paginationHoverTimeout);
-      }
-      this.paginationHoverTimeout = setTimeout(() => {
-        this.isPaginationExpanded = false;
-        this.paginationHoverTimeout = null;
-      }, 220);
-    },
-    handlePaginationFocusOut(event) {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
-        this.collapsePaginationWithDelay();
-      }
-    },
-  },
-  beforeUnmount() {
-    if (this.paginationHoverTimeout) {
-      clearTimeout(this.paginationHoverTimeout);
-    }
   },
 };
 </script>
@@ -370,38 +331,21 @@ select {
   print-color-adjust: exact;
 }
 
+
 .summary-content {
   line-height: 1.5;
 }
 
+.counter-rows {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--search-padding-inline);
+  gap: 0.5rem;
+}
+
 .pagination-window {
-  overflow: hidden;
-  max-width: 3.25rem;
-  opacity: 0.92;
-  transition: max-width 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 340ms ease;
-  will-change: max-width, opacity;
+  display: flex;
+  align-items: center;
 }
 
-.pagination-window.expanded {
-  max-width: 30rem;
-  opacity: 1;
-}
-
-.page-pill-enter-active,
-.page-pill-leave-active {
-  transition: opacity 420ms ease;
-}
-
-.page-pill-enter-from,
-.page-pill-leave-to {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pagination-window,
-  .page-pill-enter-active,
-  .page-pill-leave-active {
-    transition: none;
-  }
-}
 </style>

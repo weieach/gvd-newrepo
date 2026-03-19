@@ -311,7 +311,7 @@ export default {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-6);
-  line-height: var(--line-height-tight);
+  line-height: var(--leading-heading);
 }
 
 .content h2 {
@@ -319,7 +319,7 @@ export default {
   font-weight: var(--font-weight-semibold);
   margin-top: var(--spacing-8);
   margin-bottom: var(--spacing-4);
-  line-height: var(--line-height-tight);
+  line-height: var(--leading-heading);
 }
 
 .content p {

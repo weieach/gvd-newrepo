@@ -45,7 +45,7 @@
       />
     </div>
 
-    <div class="card-footer">
+    <div class="card-footer" :class="{ 'card-footer--has-content': isOpenAccess }">
       <span v-if="isOpenAccess" class="access-pill">
         <font-awesome-icon :icon="['fas', 'unlock']" class="access-icon" />
         <a
@@ -186,10 +186,12 @@ export default defineComponent({
   --header-gap: var(--spacing-4);
   list-style: none;
   border: 1px solid rgba(90, 54, 107, 0.08);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-5) var(--spacing-6);
+  border-radius: var(--search-radius);
+  padding: var(--spacing-5) var(--spacing-5);
+  padding-left: 1rem;
+  padding-bottom: 1.7rem;
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 20px 45px rgba(20, 30, 60, 0.08);
+  box-shadow: 0 20px 45px rgba(20, 30, 60, 0.02);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
@@ -202,7 +204,7 @@ export default defineComponent({
 .card-header {
   display: grid;
   grid-template-columns: var(--bookmark-col) minmax(0, 1fr) auto;
-  gap: var(--header-gap);
+  gap: calc(var(--header-gap) * 0.9);
   align-items: flex-start;
 }
 
@@ -221,6 +223,7 @@ export default defineComponent({
 
 .journal-title {
   margin: 0;
+  margin-top: 0.2rem;
   font-size: var(--type-body-sm);
   font-weight: var(--font-weight-semibold);
   color: #000;
@@ -229,7 +232,8 @@ export default defineComponent({
 
 .result-title {
   margin: 0;
-  font-size: var(--type-subtitle);
+  font-size: 1.15rem;
+  font-weight: 500;
   color: #000;
   line-height: 1.28;
 }
@@ -291,6 +295,14 @@ export default defineComponent({
   align-items: center;
   gap: var(--spacing-3);
   padding-left: calc(var(--bookmark-col) + var(--header-gap));
+}
+
+/* On desktop the mobile toggle is invisible — hide the footer from
+   the flex flow entirely so it doesn't create a phantom double gap. */
+@media (min-width: 769px) {
+  .card-footer:not(.card-footer--has-content) {
+    display: none;
+  }
 }
 
 .access-pill {

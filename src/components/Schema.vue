@@ -1,7 +1,7 @@
 <template>
   <div id="schema">
     <div class="blocklabel">
-      <div class="font-serif font-medium text-lg blocklabel-title">
+      <div class="font-serif font-medium text-lg blocklabel-title mb-1">
         Filter by Tags
       </div>
     </div>
@@ -271,14 +271,14 @@ export default {
 .tag-search-input {
   width: 100%;
   min-height: 46px;
-  padding: var(--spacing-2) var(--spacing-3);
-  border: 1px solid #bda7bf;
-  border-radius: var(--radius-full);
+  padding: var(--spacing-2) var(--search-padding-inline);
+  border: var(--search-border);
+  border-radius: var(--search-radius);
   font-size: var(--type-body-sm);
   line-height: 1.4;
   color: #5b2960;
   box-sizing: border-box;
-  padding-right: 34px;
+  padding-right: 34px; /* clear button overlap */
   background: #fff;
 }
 
@@ -334,10 +334,15 @@ export default {
   padding: 0;
   margin: 0;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  
 }
 
 #schema .schema-tree {
   padding-bottom: var(--spacing-3);
+  
 }
 
 #schema > .blocklabel {

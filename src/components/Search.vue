@@ -1,7 +1,7 @@
 <template>
   <div
     id="search"
-    class="pagecomponent search-page pt-[calc(25px+5vh)] max-w-[1600px] mx-auto pb-20 flex items-start relative gap-8 lg:gap-12 px-5 md:px-8 lg:px-11 flex-col lg:flex-row"
+    class="pagecomponent search-page pt-[calc(25px+5vh-2rem)] max-w-[1600px] mx-auto pb-20 flex items-start relative gap-8 lg:gap-12 px-5 md:px-8 lg:px-11 flex-col lg:flex-row"
   >
     <aside
       class="sidebar lg:sticky lg:top-[calc(108px+5vh)] w-full lg:w-[430px] self-start shrink-0 lg:h-[calc(100vh-(100px+5vh))] flex flex-col gap-4 pb-3 mb-3"
@@ -17,18 +17,17 @@
     </aside>
 
     <section class="results-panel flex-1 min-w-0" aria-live="polite">
-      <div class="results-top-row">
-        <div class="query-tools">
-          <text-search />
-          <journal-display />
+      <div class="search-control-panel">
+        <div class="results-top-row">
+          <div class="query-tools">
+            <text-search />
+            <journal-display />
+          </div>
         </div>
-        <!-- <div class="hero-support">
-          <span class="hero-stat">{{ formattedArticles }} articles indexed</span>
-          <span class="hero-stat">{{ formattedTopics }} taxonomy topics</span>
-        </div> -->
+
+        <result-counter class="result-counter"></result-counter>
       </div>
 
-      <result-counter class="result-counter"></result-counter>
       <result-list class="results"></result-list>
     </section>
   </div>
@@ -188,7 +187,7 @@ export default {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
 }
 
 .results-top-row {
@@ -220,10 +219,24 @@ export default {
   border-radius: var(--radius-full);
 }
 
-.result-counter {
-  background: rgba(90, 54, 107, 0.08);
+.search-control-panel {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  background: #FAF8FA;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-3) var(--spacing-4);
+  padding: var(--spacing-3) 0;
+  padding-top: 2.5rem;
+  /* box-shadow: 0 4px 24px rgba(20, 30, 60, 0.07); */
+}
+
+.result-counter {
+  /* visual container handled by .search-control-panel */
 }
 
 .results {

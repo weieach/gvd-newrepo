@@ -6,15 +6,15 @@
       class="nav-inner flex items-center justify-between px-5 py-3 md:px-8 lg:px-11 lg:pt-5"
     >
       <!-- Left: logo + desktop nav links -->
-      <div class="nav-left-half flex items-center gap-5 md:gap-8 lg:gap-12">
+      <div class="nav-left-half flex items-center gap-4 md:gap-5 lg:gap-6">
         <router-link
           to="/"
           class="website-logo hover:scale-[1.01] transition-transform duration-200 ease-in-out"
           @click="closeMobileMenu"
         >
-          <img src="@/assets/gvd/nav-logo.png" class="w-[142px] md:w-[164px]" alt="logo-img" />
+          <img src="@/assets/gvd/nav-logo-new.png" class="w-[142px] md:w-[164px]" alt="logo-img" />
         </router-link>
-        <div class="hidden lg:flex items-center gap-8 xl:gap-12">
+        <div class="hidden lg:flex items-center gap-9 xl:gap-12">
           <router-link to="/browse" class="nav-link">Browse</router-link>
           <router-link to="/blogs" class="nav-link">Blogs</router-link>
           <router-link to="/glossary" class="nav-link">Glossary</router-link>
@@ -22,7 +22,7 @@
       </div>
 
       <!-- Right: exit button (always visible) + desktop links + mobile toggle -->
-      <div class="flex items-center gap-3 md:gap-4">
+      <div class="flex items-center gap-6 xl:gap-8">
 
         <!-- Exit Site — always visible on all screen sizes -->
         <button
@@ -120,11 +120,24 @@ a {
   line-height: 1.3;
   font-weight: 500;
   padding: 0.5rem 0;
+  position: relative;
 }
 
 .nav-link:hover {
   color: var(--primary-color);
-  border-bottom: 4px solid var(--primary-color);
+}
+
+.nav-link:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* py-3 = 0.75 rem bottom padding on nav-inner keeps the indicator
+     flush with the nav bar's bottom border */
+  bottom: -1.5rem;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px 2px 0 0;
 }
 
 .primary-btn {

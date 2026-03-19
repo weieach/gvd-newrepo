@@ -15,12 +15,12 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content flex-1 max-w-[960px] min-w-0 flex flex-col gap-16">
+    <div class="main-content flex-1 max-w-[960px] min-w-0 flex flex-col gap-10">
       <!-- Overview Section (Dynamic) -->
       <section class="overview-section">
         <div
           v-if="overviewIntroHtml && !overviewLoading && !overviewError"
-          class="body-copy-lg text-black space-y-4"
+          class="body-copy text-black space-y-4"
         >
           <div v-html="overviewIntroHtml"></div>
         </div>
@@ -43,7 +43,7 @@
       <!-- Quick Links (Static match to redesign) -->
       <section class="quick-links-section">
         <h2
-          class="section-title text-primary-black mb-6 pb-2 border-b border-border-color"
+          class="section-title text-primary-black mb-6"
         >
           Quick links
         </h2>
@@ -72,7 +72,7 @@
       <!-- Timeline (Interactive Component) -->
       <section class="timeline-section" v-if="timelineSections.length > 0">
         <h2
-          class="section-title text-primary-black mb-6 pb-2 border-b border-border-color"
+          class="section-title text-primary-black mb-6"
         >
           Timeline
         </h2>
@@ -105,7 +105,7 @@
         <div class="section-header mb-8">
           <h2
             id="contributors-title"
-            class="section-title text-black border-b border-border-color pb-2"
+            class="section-title text-black"
           >
             Team Members & Contributors
           </h2>
@@ -406,6 +406,21 @@ export default {
 
 <style scoped>
 /* Specific overrides if needed */
+h2 {
+  padding-bottom: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+
+
+.timeline-section .text-dark-bg {
+  color: black;
+  font-size: var(--type-body);
+  /* font-family: "larken", serif; */
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
 :deep(.timeline-section img) {
   max-width: 400px;
   width: 100%;
@@ -428,11 +443,10 @@ export default {
   font-size: var(--type-section-title);
   font-weight: 500;
   color: black;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 2rem;
-  line-height: var(--leading-tight);
+  /* padding-bottom: 0.7rem; */
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+  line-height: var(--leading-subtitle);
 }
 
 :deep(.overview-section h3) {
@@ -448,7 +462,7 @@ export default {
 .quick-links-list {
   background-color: #f5f1f5;
   background-image: url("~@/assets/gvd/gvd-logo.png");
-  padding: 1rem 2.2rem;
+  padding: 1.7rem 2.2rem;
   list-style: none;
   color: var(--primary-color);
   border-radius: 1.2rem;
@@ -456,11 +470,14 @@ export default {
   background-repeat: no-repeat;
   background-position: bottom -80px right -80px;
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   /* margin-bottom: 2rem; */
 }
 
 .quick-links-list li {
-  margin-bottom: 0.2rem;
+  
 }
 
 .quick-links-list a {
@@ -480,6 +497,14 @@ export default {
   font-size: 1rem;
 }
 
+.section-title {
+  margin-bottom: 0.1rem;
+}
+
+.quick-links-section .section-title {
+  margin-bottom: 1.25rem;
+}
+
 .contributors-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -491,6 +516,10 @@ export default {
   align-items: flex-start;
   gap: 0.85rem;
   padding: 0.9rem 0.25rem;
+  
+}
+
+.contributor-row:not(:nth-last-child(-n+3)) {
   border-bottom: 1px solid var(--border-color-light);
 }
 
@@ -510,8 +539,8 @@ export default {
   display: block;
   font-size: var(--type-body);
   line-height: 1.35;
-  font-weight: 600;
-  color: var(--dark-bg);
+  font-weight: 400;
+  color: black;
 }
 
 .contributor-role {

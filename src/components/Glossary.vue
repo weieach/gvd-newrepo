@@ -1,6 +1,6 @@
 <template>
   <div
-    class="glossary-page pt-[calc(25px+5vh)] max-w-[1600px] mx-auto pb-20 flex items-start relative gap-8 lg:gap-12 px-5 md:px-8 lg:px-11 flex-col lg:flex-row"
+    class="glossary-page pt-[calc(25px+5vh)] max-w-[1600px] mx-auto pb-20 flex items-start relative gap-8 lg:gap-20 px-5 md:px-8 lg:px-11 flex-col lg:flex-row"
   >
     <!-- Sidebar -->
     <div
@@ -23,7 +23,7 @@
       </div>
 
       <div
-        class="input-bar glossary-search-bar bg-white border border-[#BDA7BF] rounded-full flex items-center gap-2 px-3 py-2 w-full overflow-hidden shrink-0"
+        class="input-bar glossary-search-bar bg-white flex items-center gap-2 py-2 w-full overflow-hidden shrink-0"
       >
         <input
           v-model="searchQuery"
@@ -140,7 +140,7 @@
             class="glossary-section scroll-mt-[150px]"
           >
             <h2
-              class="section-title text-dark-bg mb-8 pb-2 border-b-2 border-border-color"
+              class="section-title text-dark-bg pb-2 border-b-2 border-border-color"
             >
               {{ section.title }}
             </h2>
@@ -170,6 +170,7 @@
                     ></span>
                   </h3>
                   <div
+                    v-if="hasDescription(item.description)"
                     class="glossary-item-description body-copy-sm text-[#333]"
                     v-html="highlightText(item.description)"
                   ></div>
@@ -197,6 +198,7 @@
                       <span v-html="highlightText(child.title)"></span>
                     </h4>
                     <div
+                      v-if="hasDescription(child.description)"
                       class="glossary-item-description body-copy text-[#333]"
                       v-html="highlightText(child.description)"
                     ></div>
@@ -225,6 +227,7 @@
                           <span v-html="highlightText(grandchild.title)"></span>
                         </h5>
                         <div
+                          v-if="hasDescription(grandchild.description)"
                           class="glossary-item-description body-copy text-[#333]"
                           v-html="highlightText(grandchild.description)"
                         ></div>
@@ -677,6 +680,13 @@ export default {
       return null;
     },
 
+    hasDescription(desc) {
+      if (!desc) return false;
+      const tmp = document.createElement("div");
+      tmp.innerHTML = desc;
+      return (tmp.textContent || tmp.innerText || "").trim().length > 0;
+    },
+
     highlightText(text) {
       if (!this.searchQuery) return text;
       const regex = new RegExp(
@@ -710,6 +720,9 @@ export default {
 <style scoped>
 .glossary-search-bar {
   min-height: 46px;
+  border: var(--search-border);
+  border-radius: var(--search-radius);
+  padding-inline: var(--search-padding-inline);
 }
 
 .glossary-search-bar:focus-within {
@@ -763,15 +776,35 @@ export default {
   width: calc(100% - 0.85rem);
   margin-inline: auto;
 }
-.glossary-item-level-2 .glossary-item-description,
+
+.glossary-item-title-text{
+  margin-bottom: 1rem;
+}
+
+.glossary-item-level-1{
+  margin-bottom: 0.5rem;
+}
+
+.glossary-item-level-2 > .glossary-item-title{
+  margin-bottom: 0.5rem;
+}
+
+.glossary-section > .section-title {
+  margin-bottom: 1.75rem;
+}
+
+.glossary-item-level-2 > .glossary-item-description {
+  margin-bottom: 1.7rem;
+}
+
 .glossary-item-level-3 .glossary-item-description {
-  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 .glossary-item-level-2 + .glossary-item-level-2 {
-  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
 }
 .glossary-item-level-3 + .glossary-item-level-3 {
-  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 1024px) {

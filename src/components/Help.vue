@@ -17,7 +17,7 @@
       <!-- Main Content -->
 
       <div class="main-content flex-1 max-w-[960px] min-w-0 w-full">
-        <div v-if="loading" class="text-center text-gray-500 text-xl py-10">
+        <div v-if="loading" class="text-center text-gray-500 text-xl gap-2 py-10">
           Loading resources...
         </div>
 
@@ -91,13 +91,17 @@ export default {
   line-height: var(--leading-tight);
   color: black;
   margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
   padding-bottom: 0.5rem;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .resource-body h2:first-child {
   margin-top: 0;
+}
+
+p:not(ul p) {
+  margin-bottom: 1.4rem;
 }
 
 .resource-body p {
@@ -106,25 +110,32 @@ export default {
   color: black;
 }
 
+
+
 .resource-body ul {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.8rem;
   padding: 0;
   list-style: none;
 }
 
+.resource-body ul p{
+  margin-bottom: 0.2rem;
+  line-height: var(--leading-body-relaxed);
+}
+
 .resource-body li {
   background-color: white;
-  padding: 1.5rem;
+  padding: 1.2rem 1.5rem;
   border-radius: 1rem;
-  border: 1px solid var(--border-color-light);
+  /* border: 1px solid var(--border-color-light); */
   transition: box-shadow 0.2s ease;
 }
 
-.resource-body li:hover {
+/* .resource-body li:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .resource-body h3 {
   font-size: var(--type-subtitle);
@@ -133,15 +144,15 @@ export default {
   line-height: var(--leading-tight);
   color: black;
 
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .resource-body img {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 0.25rem;
   object-fit: contain;
 }

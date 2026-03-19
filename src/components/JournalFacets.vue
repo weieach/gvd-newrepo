@@ -22,7 +22,7 @@
           <select
             id="journal-sort"
             v-model="sortMode"
-            class="journal-sort-select"
+            class="journal-sort-select secondary-btn"
             aria-label="Sort journals"
           >
             <option value="alpha">A-Z</option>
@@ -58,8 +58,8 @@
               class="form-checkbox text-primary-color rounded-sm"
               @click.stop="toggleJournal(journal.name)"
             />
-            <span class="text-base truncate" :title="journal.name">{{
-              journal.name
+            <span class="text-base" :title="journal.name">{{
+              truncateName(journal.name)
             }}</span>
           </div>
           <span class="text-xs text-gray-500">({{ journal.count }})</span>
@@ -157,6 +157,9 @@ export default {
         this.$store.dispatch("addJournal", name);
       }
     },
+    truncateName(name, max = 35) {
+      return name.length > max ? name.slice(0, max) + "…" : name;
+    },
   },
 };
 </script>
@@ -165,9 +168,9 @@ export default {
 .journal-filter-input {
   width: 100%;
   min-height: 46px;
-  padding: 0.5rem 0.85rem;
-  border: 1px solid #bda7bf;
-  border-radius: 999px;
+  padding: 0.5rem var(--search-padding-inline);
+  border: var(--search-border);
+  border-radius: var(--search-radius);
   font-size: 0.95rem;
   color: #5b2960;
   outline: none;
@@ -200,27 +203,27 @@ export default {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
-  align-items: center;
+  align-items: stretch;
 }
 
 .journal-sort-select {
-  min-height: 38px;
-  padding: 0.35rem 1.9rem 0.35rem 0.6rem;
-  border: 1px solid #ddcfdf;
-  border-radius: 999px;
-  background: #fcfbfd;
-  color: #6c5970;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  /* layout & select-specific — visual tokens come from .secondary-btn */
+  width: 100%;
+  height: 100%;
+  padding: 0.35rem 1.9rem 0.35rem var(--search-padding-inline);
   outline: none;
   width: auto;
   max-width: 110px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23883f8f' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.4rem center;
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
 }
 
 .journal-sort-select:focus {
-  border-color: #bda7bf;
-  box-shadow: 0 0 0 2px rgba(136, 63, 143, 0.08);
+  box-shadow: 0 0 0 2px rgba(136, 63, 143, 0.12);
 }
 
 @media (max-width: 560px) {

@@ -13,6 +13,7 @@ import collectiontree from "./collectiontree.js";
 import makequery from "./querystringAndOr.js";
 import untaggedquery from "./untaggedquery.js";
 import MakeJournalQuery from "./journalqueries.js";
+import { SOLR_BASE } from "../../config/config";
 import router from "../router";
 
 // eslint-disable-next-line
@@ -517,10 +518,7 @@ const store = createStore({
     },
     async loadJournalList({ commit }) {
       try {
-        const protocol = "https";
-        const host = "talus.artsci.wustl.edu";
-        const path = "solr_gvd";
-        const base = `${protocol}://${host}/${path}/select?wt=json&q=*:*`;
+        const base = `${SOLR_BASE}/select?wt=json&q=*:*`;
         const params = "&rows=50000&fl=publicationTitle";
 
         const response = await fetch(base + params);
@@ -757,7 +755,11 @@ const store = createStore({
       const cacheExpiration = 24 * 60 * 60 * 1000;
       const now = new Date().getTime();
 
+      const hasCachedData =
+        state.cachedPosts?.length > 0 && state.cachedSections?.length > 0;
+
       if (
+        hasCachedData &&
         state.lastCacheUpdate &&
         now - state.lastCacheUpdate < cacheExpiration
       ) {
@@ -891,6 +893,7 @@ const store = createStore({
       const now = new Date().getTime();
 
       if (
+        state.cachedFullArticle &&
         state.fullArticleLastUpdate &&
         now - state.fullArticleLastUpdate < cacheExpiration
       ) {
@@ -939,6 +942,7 @@ const store = createStore({
       const now = new Date().getTime();
 
       if (
+        state.cachedGlossaryArticles?.length > 0 &&
         state.glossaryLastUpdate &&
         now - state.glossaryLastUpdate < cacheExpiration
       ) {
@@ -1119,10 +1123,7 @@ const store = createStore({
     async fetchJournalSuggestions(context, searchTerm) {
       try {
         // Original approach but with all documents
-        const protocol = "https";
-        const host = "talus.artsci.wustl.edu";
-        const path = "solr_gvd";
-        const base = `${protocol}://${host}/${path}/select?wt=json&q=`;
+        const base = `${SOLR_BASE}/select?wt=json&q=`;
 
         // Get all publications to extract journal titles
         const corequery = encodeURIComponent("*");

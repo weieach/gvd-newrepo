@@ -1,15 +1,38 @@
 <template>
   <div>
-    <!-- Floating contact button — sits above the back-to-top button -->
-    <button
-      type="button"
-      class="contact-fab"
-      title="Contact us or send feedback"
-      aria-label="Contact us"
-      @click="openModal"
-    >
-      <i class="ph-fill ph-chat-circle-dots"></i>
-    </button>
+    <!-- Floating action card — Contact + Return to top -->
+    <div class="fab-card" :style="{ bottom: fabBottom }">
+      <!-- Contact -->
+      <div class="fab-item">
+        <button
+          type="button"
+          class="fab-circle fab-circle--primary"
+          title="Contact us or send feedback"
+          aria-label="Contact us"
+          @click="openModal"
+        >
+          <i class="ph-fill ph-chat-circle-dots"></i>
+        </button>
+        <span class="fab-label">Contact</span>
+      </div>
+
+      <!-- Return to top — slides in when scrolled -->
+      <div class="fab-extra" :class="{ 'fab-extra--visible': showBackToTop }">
+        <div class="fab-divider"></div>
+        <div class="fab-item">
+          <button
+            type="button"
+            class="fab-circle fab-circle--secondary"
+            title="Return to top"
+            aria-label="Go to top"
+            @click="scrollToTop"
+          >
+            <i class="ph-bold ph-caret-up"></i>
+          </button>
+          <span class="fab-label">Go to top</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Contact / Feedback Modal -->
     <div
@@ -334,7 +357,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, onMounted, watch } from "vue";
+import { ref, reactive, computed, onMounted, onUnmounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useTurnstile } from "@/composables/useTurnstile";
 
@@ -343,6 +366,8 @@ export default {
   setup() {
     const store = useStore();
     const showModal = computed(() => store.state.feedbackModalOpen);
+    const showBackToTop = ref(false);
+    const fabBottom = ref("2.8rem");
     const currentView = ref("selection");
     const feedbackCategory = ref("");
     const submissionSuccess = ref(false);
@@ -442,12 +467,46 @@ export default {
       }
     });
 
+    const DEFAULT_BOTTOM_PX = 2.5 * 16; // 2.5rem in px
+    let rafId = null;
+
+    const handleScroll = () => {
+      if (rafId) return; // coalesce rapid scroll events into one rAF
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+
+        showBackToTop.value = window.scrollY > 420;
+
+        const footer = document.querySelector("footer");
+        if (footer) {
+          const footerTop = footer.getBoundingClientRect().top;
+          const gap = window.innerHeight - footerTop;
+          fabBottom.value =
+            gap > 0 ? `${gap + DEFAULT_BOTTOM_PX}px` : "2.5rem";
+        }
+      });
+    };
+
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     onMounted(() => {
       formData.pageUrl = window.location.href;
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
     });
 
     return {
-      showModal, // computed from store
+      showModal,
+      showBackToTop,
+      fabBottom,
+      scrollToTop,
       currentView,
       feedbackCategory,
       submissionSuccess,
@@ -467,30 +526,91 @@ export default {
 </script>
 
 <style scoped>
-/* Floating contact button — bottom-right, above the back-to-top button */
-.contact-fab {
+/* ── Floating action card ── */
+.fab-card {
   position: fixed;
-  right: 1.15rem;
-  bottom: 4.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  border: 1px solid rgba(189, 167, 191, 0.85);
-  background: rgba(250, 248, 250, 0.95);
-  color: var(--primary-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  cursor: pointer;
+  right: 0;
+  bottom: 3rem; /* overridden by inline :style binding */
   z-index: 120;
-  box-shadow: 0 6px 18px rgba(20, 30, 60, 0.12);
-  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+  /* ~1 frame — bridges rAF gaps without feeling laggy */
+  transition: bottom 16ms linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.5rem 0 0 1.5rem;
+  padding: 1rem 1.15rem;
+  padding-right: 1.3rem;
+  box-shadow: 0 0 150px 0 rgba(112, 50, 119, 0.1);
+  border: 1px solid rgba(189, 167, 191, 0.25);
+  border-right: none;
+  min-width: 5.25rem;
 }
 
-.contact-fab:hover {
-  background: #fff;
-  color: var(--dark-bg);
+.fab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fab-circle {
+  width: 3.375rem;
+  height: 3.375rem;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.fab-circle:hover {
+  transform: scale(1.06);
+  filter: brightness(0.92);
+}
+
+.fab-circle--primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.fab-circle--secondary {
+  background: #f0eaf0;
+  color: var(--primary-color);
+}
+
+.fab-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  line-height: 1.25;
+  max-width: 4.25rem;
+  white-space: normal;
+  word-break: keep-all;
+}
+
+/* ── Return-to-top section — smooth expand/collapse ── */
+.fab-extra {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+.fab-extra--visible {
+  max-height: 8rem;
+  opacity: 1;
+}
+
+.fab-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(189, 167, 191, 0.3);
+  margin: 0.75rem 0;
 }
 
 .turnstile-container {
@@ -500,7 +620,8 @@ export default {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contact-fab {
+  .fab-circle,
+  .fab-extra {
     transition: none;
   }
 }

@@ -231,13 +231,8 @@ ul.ps-3 {
   margin-left: 24px; /* Progressive indentation */
   margin-top: 4px;
   margin-bottom: 4px;
-  border-left: 3px solid transparent;
+  border-left: 3px solid #F3EEF3;
   transition: border-color 0.2s ease;
-}
-
-/* Add colored left border to show active hierarchy */
-ul.ps-3 {
-  border-left-color: rgba(136, 63, 143, 0.15);
 }
 
 /* Stronger border on hover */
@@ -259,21 +254,21 @@ ul.ps-3:hover {
 /* Parent items (with children) get distinctive styling */
 .has-children > .label {
   font-weight: 500;
-  background-color: rgba(238, 233, 239, 0.4);
+  background-color: rgb(255, 255, 255);
 }
 
 .has-children > .label:hover {
-  background-color: rgba(238, 233, 239, 0.7);
-  border-left-color: #883f8f;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-left: 3px solid #C29CC5;
 }
 
 /* Leaf items (no children) are lighter */
 li[role="treeitem"]:not(.has-children) > .label {
-  background-color: rgba(245, 242, 247, 0.3);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 li[role="treeitem"]:not(.has-children) > .label:hover {
-  background-color: rgba(238, 233, 239, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-left-color: rgba(136, 63, 143, 0.4);
 }
 
@@ -295,7 +290,7 @@ li[role="treeitem"]:not(.has-children) > .label:hover {
 }
 
 .has-children[aria-expanded="true"] > .label {
-  background-color: rgba(136, 63, 143, 0.08);
+  background-color: rgba(255, 255, 255, 0.7);
   border-left-color: #883f8f;
   margin-bottom: 0.5rem;
 }

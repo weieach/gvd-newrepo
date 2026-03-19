@@ -1,6 +1,6 @@
 /* global _ */
 import "../../public/static/lodash.min.js";
-import { API_CONFIG } from "../../config/config";
+import { SOLR_BASE } from "../../config/config";
 
 // export default function makequery (query, querystart = 0) {
 //     /* Takes an internal query object and returns a SOLR query string;
@@ -32,11 +32,7 @@ export default function makequery(
   currentSort = "parsedDate desc",
   pageSize = 50
 ) {
-  const { protocol, host, path } = API_CONFIG;
-  // const protocol = process.env.protocol ? process.env.protocol : "https";
-  // const host = process.env.host;
-  // const path = process.env.path;
-  const base = `${protocol}://${host}/${path}/select?wt=json&q=`;
+  const base = `${SOLR_BASE}/select?wt=json&q=`;
   const facetstring = "&facet.field=tags&facet.field=publicationTitle_str&facet.limit=-1&facet=on&json.nl=map";
   const corequery = makecorequery(query);
   const sortstring = `&sort=${currentSort}`;

@@ -23,7 +23,7 @@
         Loading blogs...
       </div>
 
-      <div v-else class="cards-blog-lg flex flex-col gap-16">
+      <div v-else class="cards-blog-lg flex flex-col gap-12">
         <div
           v-if="fullArticle"
           class="intro-text max-w-[800px] body-copy-lg text-black"

@@ -7,22 +7,13 @@
     <div class="main-content flex-auto pt-[calc(50px+2vh)]">
       <router-view />
     </div>
-    <button
-      v-show="showBackToTop"
-      type="button"
-      class="back-to-top-btn"
-      aria-label="Back to top"
-      @click="scrollToTop"
-    >
-      <i class="ph-bold ph-caret-up"></i>
-    </button>
     <feedback-tab />
     <page-footer />
   </div>
 </template>
 
 <script>
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import FeedbackTab from "./components/FeedbackTab.vue";
 import PageFooter from "./components/PageFooter.vue";
@@ -37,15 +28,6 @@ export default {
   },
   setup() {
     const route = useRoute();
-    const showBackToTop = ref(false);
-
-    const handleScroll = () => {
-      showBackToTop.value = window.scrollY > 420;
-    };
-
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
 
     onMounted(() => {
       if (window.gtag) {
@@ -53,18 +35,7 @@ export default {
           page_path: route.path,
         });
       }
-      window.addEventListener("scroll", handleScroll, { passive: true });
-      handleScroll();
     });
-
-    onUnmounted(() => {
-      window.removeEventListener("scroll", handleScroll);
-    });
-
-    return {
-      showBackToTop,
-      scrollToTop,
-    };
   },
 };
 </script>
@@ -92,14 +63,23 @@ export default {
   /* shared type scale for active pages */
   --type-page-title: clamp(2rem, 1.7rem + 1.35vw, 2.625rem);
   --type-section-title: clamp(1.5rem, 1.35rem + 0.55vw, 1.875rem);
-  --type-subtitle: 1.25rem;
-  --type-body-lg: 1.05rem;
-  --type-body: 1rem;
+  --type-subtitle: 1.2rem;
+  --type-body-lg: 1rem;
+  --type-body: 0.96rem;
   --type-body-sm: 0.925rem;
 
   --leading-tight: 1;
-  --leading-body: 1.6;
-  --leading-body-relaxed: 1.68;
+  --leading-heading: 1.3;
+  --leading-body: 1.31;
+  --leading-body-relaxed: 1.45;
+
+  /* Layout */
+  --nav-height: 80px;
+
+  /* Search bar tokens */
+  --search-radius: 16px;
+  --search-border: 0.8px solid #bea7c0;
+  --search-padding-inline: 1rem;
 }
 
 /* Global Reset/Defaults matching reference */
@@ -145,6 +125,10 @@ button {
   font: inherit;
 }
 
+input[type="checkbox"] {
+  accent-color: var(--cerulean);
+}
+
 .page-title {
   font-family: "larken", serif;
   font-size: var(--type-page-title);
@@ -174,29 +158,22 @@ button {
 
 .body-copy-sm {
   font-size: var(--type-body-sm);
-  line-height: 1.55;
+  line-height: 1.4;
 }
 
-.back-to-top-btn {
-  position: fixed;
-  right: 1.15rem;
-  bottom: 1.15rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid rgba(189, 167, 191, 0.85);
-  border-radius: 999px;
-  background: rgba(250, 248, 250, 0.95);
+.secondary-btn {
+  background: rgba(90, 54, 107, 0.06);
   color: var(--primary-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+  border: none;
+  border-radius: var(--search-radius);
+  font-size: var(--type-body-sm);
+  font-weight: 500;
   cursor: pointer;
-  z-index: 120;
-  box-shadow: 0 6px 18px rgba(20, 30, 60, 0.12);
+  transition: background-color 0.2s ease-out;
 }
 
-.back-to-top-btn:hover {
-  background: #fff;
+.secondary-btn:hover {
+  background: rgba(90, 54, 107, 0.11);
 }
+
 </style>

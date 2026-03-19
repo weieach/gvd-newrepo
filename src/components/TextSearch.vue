@@ -1,6 +1,6 @@
 <template>
   <div id="textsearch" class="search-box" ref="root">
-    <div class="search-container flex items-center gap-3">
+    <div class="search-container flex items-stretch gap-3">
       <div class="search-input-wrapper flex-1">
         <input
           v-model="textSearch"
@@ -25,15 +25,11 @@
 
       <button
         @click="viewBookmarks"
-        class="bookmark-btn flex items-center gap-2 px-4 py-3 rounded-full bg-white border border-[#BDA7BF]/20 shadow-sm hover:bg-[#FAF8FA] transition-all group relative"
-        title="View Bookmarks"
+        class="bookmark-btn secondary-btn relative"
+        title="Bookmarks"
       >
-        <i
-          class="ph-bold ph-bookmark-simple text-xl text-primary-color group-hover:scale-110 transition-transform"
-        ></i>
-        <span class="text-sm font-medium text-dark-bg hidden md:inline"
-          >View Bookmarks</span
-        >
+        <i class="ph-bold ph-bookmark-simple"></i>
+        <span class="hidden md:inline">Bookmarks</span>
         <span
           v-if="numBookmarks > 0"
           class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] h-[18px] flex items-center justify-center border-2 border-white"
@@ -273,9 +269,9 @@ export default {
   display: flex;
   align-items: center;
   background: #fff;
-  border: 1px solid #bda7bf;
-  border-radius: var(--radius-full);
-  padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) var(--spacing-4);
+  border: var(--search-border);
+  border-radius: var(--search-radius);
+  padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) var(--search-padding-inline);
   box-shadow: none;
   min-height: 46px;
 }
@@ -300,6 +296,20 @@ export default {
 .search-input-wrapper:focus-within {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(136, 63, 143, 0.12);
+}
+
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-inline: var(--search-padding-inline);
+  align-self: stretch;
+  white-space: nowrap;
+}
+
+.bookmark-btn i {
+  font-size: 1.1rem;
 }
 
 .clear-search-btn {
